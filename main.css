@@ -26,3 +26,7 @@
 .clickbox {
   background-color: redc
 }
+
+.score-right {
+  float: right;
+}
