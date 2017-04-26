@@ -1,0 +1,28 @@
+.col-4 {
+  background-color: yellow;
+}
+
+.col-8 {
+  background-color: white;
+}
+
+.flex-box {
+  border: 1px solid black;
+  margin-right: 15px;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+}
+
+
+
+.row {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row;
+
+}
+
+.clickbox {
+  background-color: redc
+}
