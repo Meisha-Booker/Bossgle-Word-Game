@@ -3,7 +3,7 @@ $(document).ready(function(){
   $(".flex-box").each(function(index, box){
     $(box).text(addLetter())
   })
-    var alwaysArray= []
+    // var alwaysArray= []
   $(".flex-box").click(function(){
     $(this).css("background","orange");
 
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
     // var newArray = []
     // newArray.push([finalWord, wordScore])
-    alwaysArray.push(finalWord)
+    // alwaysArray.push(finalWord)
     console.log(finalWord);
 
     $('.unfinished-word').text(finalWord);
@@ -29,13 +29,14 @@ $(document).ready(function(){
     $(".sub-button").click(function() {
       $(".flex-box").css("background","white");
 
-      $('.words').text(finalWord + " " + wordScore);
+    $('.words').text(finalWord + " " + wordScore);
 
       $('.score-right').text(wordScore);
-      word = []
-      console.log(alwaysArray);
 
-      $('.unfinished-word').text();
+      word = []
+      // console.log(alwaysArray);
+
+      $('.unfinished-word').remove();
         // var completedWord = $('.unfinished-word').text(word.join(""));
         // $(".sub-button").click(function() {
         //   $('.words').replace(completedWord);
@@ -48,10 +49,14 @@ $(document).ready(function(){
 
   $(".clear-button").click(function() {
     $('.unfinished-word').remove();
+    $(".flex-box").css("background","white");
   })
 
   $(".reset-button").click(function() {
     $('.unfinished-word').remove();
+    $('.words').remove();
+    $('.score-right').remove();
+    $(".flex-box").css("background","white");
     $(".flex-box").each(function(index, box) {
       $(box).text(addLetter())
     })
