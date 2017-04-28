@@ -1,4 +1,4 @@
-$(document).ready(function(){
+```$(document).ready(function(){
     var alwaysArray = []
     var letter;
     var finalWord;
@@ -42,8 +42,9 @@ $(document).ready(function(){
 
   //Submits word to the scoreboard
   $(".sub-button").click(function() {
+    console.log(idElement);
     if (finalWord.length > 2) {
-    $(".flex-box").css("background","white");
+    $(".flex-box").css("background","moccasin");
     //Creates new paragraph element to append to words section
     var newWord = document.createElement('p')
     newWord.innerText = finalWord + " " + wordScore
@@ -55,24 +56,25 @@ $(document).ready(function(){
         totalScore += wordScore;
         $(this).text(totalScore);
     });
-    // word = []
+    word = []
     console.log(alwaysArray);
     while (ids.length > 0) {
       let currentId = ids.shift()
       document.querySelector('#'+ currentId).disabled = false;
     }
-    ids = []
-    word = []
-    // ids.disabled = false;
-}
-else {
-    alert("Please submit three letters or more!")
-}
-  })
+    ids = [];
+    word = [];
+    ids.disabled = false;
+  }
+  else {
+      alert("Please submit three letters or more!")
+  }
+})
 
     //Clears the box color and removes current word
+
   $(".clear-button").click(function() {
-    $(".flex-box").css("background","white");
+    $(".flex-box").css("background","moccasin");
     $('.unfinished-word').remove();
   })
 
@@ -88,4 +90,6 @@ var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 function addLetter() {
   var index= Math.floor(Math.random() * letters.length) +1;
   return letters[index -1];
-}
+}```
+
+new messages
