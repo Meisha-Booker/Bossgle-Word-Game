@@ -91,5 +91,3 @@ function addLetter() {
   var index= Math.floor(Math.random() * letters.length) +1;
   return letters[index -1];
 }
-
-new messages
