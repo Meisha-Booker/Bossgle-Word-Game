@@ -3,11 +3,20 @@ $(document).ready(function(){
     var letter;
     var finalWord;
     var wordScore;
-  $(".flex-box").each(function(index, box){
+    var totalScore = 0;
+    var word = [];
+    var idElement;
+  $(".flex-box").each(function(index, box) {
     $(box).text(addLetter())
   })
-
+  let ids = []
   $(".flex-box").click(function(){
+    ids.push(this.id)
+    idElement= document.getElementById(this.id);
+    if (!idElement.disabled){
+      var letter = idElement.innerHTML;
+      finalWord += letter;
+
     $(this).css("background","orange");
 
     // Grab one letter and push to array.
@@ -19,45 +28,60 @@ $(document).ready(function(){
 
     // This is the final word score.
     // Each letter is 9 points.
+
     wordScore = (finalWord.length * 9)
     console.log(wordScore);
 
     alwaysArray.push(finalWord)
     console.log(finalWord);
 
-    $('.unfinished-word').text(finalWord);
+    $('.unfinished-word').html(finalWord);
+    idElement.disabled = true;
+  }
+})
+
+  //Submits word to the scoreboard
+  $(".sub-button").click(function() {
+    if (finalWord.length > 2) {
+    $(".flex-box").css("background","white");
+    //Creates new paragraph element to append to words section
+    var newWord = document.createElement('p')
+    newWord.innerText = finalWord + " " + wordScore
+    document.querySelector('.words').appendChild(newWord);
+    $('.words').prepend(newWord);
+
+    //Adds total score to scoreboard
+    $(".score-right").each(function() {
+        totalScore += wordScore;
+        $(this).text(totalScore);
+    });
+    // word = []
+    console.log(alwaysArray);
+    while (ids.length > 0) {
+      let currentId = ids.shift()
+      document.querySelector('#'+ currentId).disabled = false;
+    }
+    ids = []
+    word = []
+    // ids.disabled = false;
+}
+else {
+    alert("Please submit three letters or more!")
+}
   })
 
-    $(".sub-button").click(function() {
-      $(".flex-box").css("background","white");
-
-      var newWord = document.createElement('p')
-      newWord.innerText = finalWord + " " + wordScore
-      document.querySelector('.words').appendChild(newWord);
-
-      $('.score-right').text(wordScore);
-      word = []
-      console.log(alwaysArray);
-      $('.unfinished-word').text();
-    })
-
+    //Clears the box color and removes current word
   $(".clear-button").click(function() {
     $(".flex-box").css("background","white");
     $('.unfinished-word').remove();
   })
 
   $(".reset-button").click(function() {
-    $(".flex-box").css("background","white");
-    $('.unfinished-word').detach();
-    $(".flex-box").each(function(index, box) {
-      $(box).text(addLetter())
+      location.reload();
     })
   })
-})
+//})
 
-
-
-var word = [];
 
 var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
