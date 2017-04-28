@@ -1,4 +1,4 @@
-```$(document).ready(function(){
+$(document).ready(function(){
     var alwaysArray = []
     var letter;
     var finalWord;
@@ -90,6 +90,6 @@ var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 function addLetter() {
   var index= Math.floor(Math.random() * letters.length) +1;
   return letters[index -1];
-}```
+}
 
 new messages
