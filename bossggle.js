@@ -1,79 +1,94 @@
 $(document).ready(function(){
-
-  $(".flex-box").each(function(index, box){
+    var alwaysArray = []
+    var letter;
+    var finalWord;
+    var wordScore;
+    var totalScore = 0;
+    var word = [];
+    var idElement;
+    var currentId;
+  $(".flex-box").each(function(index, box) {
     $(box).text(addLetter())
   })
-    // var alwaysArray= []
+  let ids = []
   $(".flex-box").click(function(){
+    ids.push(this.id)
+    idElement= document.getElementById(this.id);
+    if (!idElement.disabled){
+      var letter = idElement.innerHTML;
+      finalWord += letter;
+
     $(this).css("background","orange");
 
     // Grab one letter and push to array.
-    var letter = $(this).text()
+    letter = $(this).text()
     word.push(letter);
 
     // Join all the letters.
-    var finalWord= word.join("");
+    finalWord = word.join("");
 
     // This is the final word score.
     // Each letter is 9 points.
-    var wordScore= (finalWord.length * 9)
+
+    wordScore = (finalWord.length * 9)
     console.log(wordScore);
 
-    // var newArray = []
-    // newArray.push([finalWord, wordScore])
-    // alwaysArray.push(finalWord)
+    alwaysArray.push(finalWord)
     console.log(finalWord);
 
-    $('.unfinished-word').text(finalWord);
+    $('.unfinished-word').html(finalWord);
+    idElement.disabled = true;
+  }
 
-    $(".sub-button").click(function() {
-      $(".flex-box").css("background","white");
+});
 
-    $('.words').text(finalWord + " " + wordScore);
+  //Submits word to the scoreboard
+  $(".sub-button").click(function() {
+    console.log(idElement);
+  if (finalWord.length > 2) {
+    $(".flex-box").css("background","white");
+    //Creates new paragraph element to append to words section
+    var newWord = document.createElement('p')
+    newWord.innerText = finalWord + " " + wordScore
+    document.querySelector('.words').appendChild(newWord);
+    $('.words').prepend(newWord);
 
-      $('.score-right').text(wordScore);
-
-      word = []
-      // console.log(alwaysArray);
-
-      $('.unfinished-word').remove();
-        // var completedWord = $('.unfinished-word').text(word.join(""));
-        // $(".sub-button").click(function() {
-        //   $('.words').replace(completedWord);
-    })
-
-    // $(".sub-button").click(function() {
-    //   $('.words').text(finalWord);
-
+    //Adds total score to scoreboard
+    $(".score-right").each(function() {
+        totalScore += wordScore;
+        $(this).text(totalScore);
+    });
+    // word = []
+    console.log(alwaysArray);
+    while (ids.length > 0) {
+      let currentId = ids.shift()
+      document.querySelector('#'+ currentId).disabled = false;
+    }
+    ids = []
+    word = []
+    // ids.disabled = false;
+}
+else {
+    alert("Please submit three letters or more!")
+}
   })
 
+    //Clears the box color and removes current word
   $(".clear-button").click(function() {
-    $('.unfinished-word').remove();
     $(".flex-box").css("background","white");
+    $('.unfinished-word').remove();
   })
 
   $(".reset-button").click(function() {
-    $('.unfinished-word').remove();
-    $('.words').remove();
-    $('.score-right').remove();
-    $(".flex-box").css("background","white");
-    $(".flex-box").each(function(index, box) {
-      $(box).text(addLetter())
+      location.reload();
     })
   })
-})
+//})
 
-
-
-var word = [];
 
 var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 function addLetter() {
   var index= Math.floor(Math.random() * letters.length) +1;
   return letters[index -1];
-}
-
-function scoreCalculator() {
-
 }
