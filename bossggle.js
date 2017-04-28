@@ -6,7 +6,6 @@ $(document).ready(function(){
     var totalScore = 0;
     var word = [];
     var idElement;
-    var currentId;
   $(".flex-box").each(function(index, box) {
     $(box).text(addLetter())
   })
@@ -39,13 +38,11 @@ $(document).ready(function(){
     $('.unfinished-word').html(finalWord);
     idElement.disabled = true;
   }
-
-});
+})
 
   //Submits word to the scoreboard
   $(".sub-button").click(function() {
-    console.log(idElement);
-  if (finalWord.length > 2) {
+    if (finalWord.length > 2) {
     $(".flex-box").css("background","white");
     //Creates new paragraph element to append to words section
     var newWord = document.createElement('p')
